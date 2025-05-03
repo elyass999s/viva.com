@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>Viva Designs - Milky Way</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
+<link rel="stylesheet" href="script.js">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+    }
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      overflow-x: hidden;
+      background: transparent;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -100;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 2rem;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      color: #00ffff;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .orbit-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 180px;
+      height: 100vh;
+      perspective: 2000px;
+    }
+
+    .orbit {
+      width: 600px;
+      height: 600px;
+      position: relative;
+      animation: spin 24s linear infinite;
+      transform-style: preserve-3d;
+    }
+
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to { transform: rotateY(360deg); }
+    }
+
+    .card {
+      width: 300px;
+      height: 450px;
+      position: absolute;
+     
+      left: 20%;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .galaxy-card {
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      border: 3px solid #00ffff;
+      transform: rotateY(0deg) translateZ(300px);
+    }
+
+    .nebula-card {
+      background: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+      border: 3px solid #ff00ff;
+      transform: rotateY(120deg) translateZ(300px);
+    }
+
+    .quasar-card {
+      background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,255,255,0.2));
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+      border: 3px solid transparent;
+border-radius: 9px;
+      background-clip: padding-box;
+      border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ffffff) 1;
+      transform: rotateY(240deg) translateZ(300px);
+    }
+
+    @media (max-width: 500px) {
+      .orbit {
+        width: 60vw;
+        height: 60vw;
+      }
+
+      .card {
+        width: 90%;
+        height: 380px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+ 
+
+  <div class="orbit-container">
+    <div class="orbit" id="orbit">
+      <div class="card galaxy-card">
+        <h2>Website design proposal and graphic design services</h2>
+        <p>introduction<br>
+
+          With the growing need for a strong digital presence, we aim to 
+          help businesses better introduce their brand and communicate more
+           effectively with their customers
+           by providing specialized services in the field of graphic design and website design.</p>
+      </div>
+      <div class="card nebula-card">
+        <h2>Project Objectives</h2>
+        <p>
+          Design a responsive professional website and
+          User-Friendly
+          Providing graphic design services including logo design, visual identity, advertising banners, and graphic content
+          Improving user experience (UX) and user interface (UI) to attract and
+          User retention
+          Create a platform to better introduce product services and brand story</p>
+      </div>
+      <div class="card quasar-card">
+        
+        <p>
+          Service Scope<br>
+          1. Website Design
+          Custom User Interface Design (UI Design)
+          Optimized User Experience Design (UX Design)
+          Website development using modern technologies: HTML5, CSS3
+          CMS of choice such as WordPress and JavaScript
+          Responsive design compatible with mobile, tablet, and desktop
+          Basic search engine optimization (SEO)
+          Integration with social media platforms
+          2. Graphic Design Services 
+          Logo and visual identity design         
+          Design of online and print advertising banners
+          Business cards, letterheads, and other graphic stationery
+          Graphic content creation for social media</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="control-button" id="toggle">Pause</button>
+  <script>
+    const orbit = document.getElementById('orbit'); // مطمئن شو orbit ID داره
+    const toggleBtn = document.getElementById('toggle');
+    let isSpinning = true;
+  
+    toggleBtn.addEventListener('click', () => {
+      if (isSpinning) {
+        orbit.style.animationPlayState = 'paused';
+        toggleBtn.textContent = 'Resume';
+      } else {
+        orbit.style.animationPlayState = 'running';
+        toggleBtn.textContent = 'Pause';
+      }
+      isSpinning = !isSpinning;
+    });
+  </script>
+  
+  
+  
+  
+  
+  <header>
+    <div class="logo">
+      <lord-icon
+        src="https://cdn.lordicon.com/lzgqzxrq.json"
+        trigger="loop"
+        colors="primary:#00ffff,secondary:#ffffff">
+      </lord-icon>
+      Viva Designs
+    </div>
+    <nav>
+      <a href="#">
+        <lord-icon src="https://cdn.lordicon.com/hjbsbdhw.json" trigger="loop" colors="primary:#ffffff,secondary:#00ffff"></lord-icon> Home
+      </a>
+      <a href="#">
+        <lord-icon src="https://cdn.lordicon.com/qhviklyi.json" trigger="loop" colors="primary:#ffffff,secondary:#00ffff"></lord-icon> Services
+      </a>
+      <a href="#">
+        <lord-icon src="https://cdn.lordicon.com/eszyyflr.json" trigger="loop" colors="primary:#ffffff,secondary:#00ffff"></lord-icon> About Us
+      </a>
+      <a href="#">
+        <lord-icon src="https://cdn.lordicon.com/aycieyht.json" trigger="loop" colors="primary:#ffffff,secondary:#00ffff"></lord-icon> Contact Us
+      </a>
+    </nav>
+  </header>
+
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 5000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('bg').replaceWith(renderer.domElement);
+    renderer.domElement.id = 'bg';
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const pointLight = new THREE.PointLight(0xffffff, 1.5);
+    pointLight.position.set(0, 0, 0);
+    scene.add(pointLight);
+
+    const starsGeometry = new THREE.BufferGeometry();
+    const starVertices = [];
+    const starColors = [];
+
+    for (let i = 0; i < 60000; i++) {
+      const radius = Math.random() * 2000 + 500;
+      const angle = Math.random() * Math.PI * 2;
+      const branch = (i % 5) * (Math.PI * 2) / 5;
+      const spinAngle = angle + branch;
+      const x = Math.cos(spinAngle) * radius + (Math.random() - 0.5) * 100;
+      const y = (Math.random() - 0.5) * 300;
+      const z = Math.sin(spinAngle) * radius + (Math.random() - 0.5) * 100;
+      starVertices.push(x, y, z);
+      const color = new THREE.Color();
+      color.setHSL(0.6 + Math.random() * 0.4, 1, Math.random() * 0.5 + 0.5);
+      starColors.push(color.r, color.g, color.b);
+    }
+
+    starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    starsGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
+    const starsMaterial = new THREE.PointsMaterial({ size: 0.7, vertexColors: true });
+    const stars = new THREE.Points(starsGeometry, starsMaterial);
+    scene.add(stars);
+
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(50, 64, 64),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, emissive: 0xffffcc, emissiveIntensity: 2 })
+    );
+    core.position.set(0, 0, -1000);
+    scene.add(core);
+
+    const sun = new THREE.Mesh(
+      new THREE.SphereGeometry(40, 64, 64),
+      new THREE.MeshBasicMaterial({ color: 0xFFFF00, emissive: 0xFFFF00, emissiveIntensity: 2 })
+    );
+    sun.position.set(0, 0, -300);
+    scene.add(sun);
+
+    const earthTexture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(15, 64, 64),
+      new THREE.MeshPhongMaterial({ map: earthTexture })
+    );
+    earth.userData = { radius: 100, speed: 0.01, angle: 0 };
+    scene.add(earth);
+
+    const saturn = new THREE.Mesh(
+      new THREE.SphereGeometry(25, 64, 64),
+      new THREE.MeshPhongMaterial({ color: 0xffcc99 })
+    );
+    saturn.userData = { radius: 200, speed: 0.005, angle: Math.random() * Math.PI * 2 };
+    scene.add(saturn);
+
+    const ringGeometry = new THREE.RingGeometry(30, 40, 64);
+    const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, side: THREE.DoubleSide });
+    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+    ring.rotation.x = Math.PI / 2;
+    scene.add(ring);
+
+    const uranus = new THREE.Mesh(
+      new THREE.SphereGeometry(20, 64, 64),
+      new THREE.MeshPhongMaterial({ color: 0x66ccff })
+    );
+    uranus.userData = { radius: 300, speed: 0.003, angle: Math.random() * Math.PI * 2 };
+    scene.add(uranus);
+
+    camera.position.z = 150;
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      camera.rotation.y = x * 0.2;
+      camera.rotation.x = y * 0.2;
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      stars.rotation.y += 0.0002;
+      [earth, saturn, uranus].forEach(planet => {
+        planet.userData.angle += planet.userData.speed;
+        planet.position.x = sun.position.x + Math.cos(planet.userData.angle) * planet.userData.radius;
+        planet.position.z = sun.position.z + Math.sin(planet.userData.angle) * planet.userData.radius;
+      });
+      ring.position.copy(saturn.position);
+      ring.rotation.z += 0.001;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
